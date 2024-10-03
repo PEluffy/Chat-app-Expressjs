@@ -26,21 +26,26 @@
           maxlength="20"
         />
       </div>
+
       <ul class="message-container" id="message-container">
         <li class="message-left">
           <p class="messaage">
-            Lorem, ipsum <span>bluebird . 26 July 10:40</span>
+            Lorem, ipsum
+            <span class="date-time-msg" id="date-time-msg"> </span>
           </p>
         </li>
         <li class="message-right">
           <p class="messaage">
-            Lorem, ipsum<span>bluebird . 26 July 10:40</span>
+            Lorem, ipsum<span class="date-time-msg" id="date-time-msg"
+              >bluebird . 26 July 10:40</span
+            >
           </p>
         </li>
         <li class="message-feedback">
-          <p class="feedback" id="feedback">killer is typing a message</p>
+          <p class="feedback" id="feedback"></p>
         </li>
       </ul>
+
       <form class="message-form" id="message-form">
         <input
           type="text"
@@ -54,7 +59,10 @@
         </button>
       </form>
     </div>
-    <h3 class="clients-total" id="clients-total">Total clients: 2</h3>
+    <h3 class="clients-total" id="clients-total">
+      Total clients:
+      <span class="clients-sum" id="clients-sum"></span>
+    </h3>
     <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
   </body>

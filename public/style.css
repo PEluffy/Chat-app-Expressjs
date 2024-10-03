@@ -78,7 +78,7 @@ body {
 .message-right > p > span {
   display: block;
   font-style: italic;
-  font-size: 10px;
+  font-size: 8px;
   margin-top: 4px;
 }
 .feedback {
