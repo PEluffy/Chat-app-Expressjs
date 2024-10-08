@@ -40,6 +40,22 @@ app.post("/register", (req, res) => {
     );
   });
 });
+app.post("/login", (req, res) => {
+  const userData = req.body;
+  fs.readFile(path.join(__dirname, "user.json"), "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading user.json", err);
+      return res.static(500).send("server Error");
+    }
+    let users;
+    try {
+      users = JSON.parse(data);
+    } catch (e) {
+      users = [];
+    }
+    console.log(users);
+  });
+});
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });

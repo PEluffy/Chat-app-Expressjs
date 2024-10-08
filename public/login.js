@@ -1,34 +1,19 @@
-const form = document.getElementById("form-registration");
-form.addEventListener("submit", (e) => {
+const loginForm = document.getElementById("form-login");
+loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  console.log("Form submitted!"); // Add this line
-  const formData = new FormData(form);
+  const formData = new FormData(loginForm);
   const userData = {};
+  console.log(formData);
   formData.forEach((value, key) => {
     userData[key] = value;
   });
-  console.log("this is user data", userData);
-
-  fetch("/register", {
+  console.log("login submit ", userData);
+  fetch("/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return res.text();
-    })
-    .then((data) => {
-      console.log("response:", data);
-    })
-    .catch((err) => {
-      console.error("There was a problem whith the fetch operation:", err);
-    });
-  form.reset();
-  window.location.href = "/";
+  });
 });
