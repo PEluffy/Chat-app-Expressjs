@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "chat-websocket": "file:",
     "express": "^4.21.0",
     "socket.io": "^4.8.0"

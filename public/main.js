@@ -5,6 +5,7 @@ var typer = document.getElementById("name-input");
 var feedback = document.getElementById("feedback");
 var messageContainer = document.getElementById("message-container");
 
+//when message input is in active state
 messageInput.addEventListener("focus", function (e) {
   console.log(typer.value);
   socket.emit("typing", {
@@ -12,6 +13,7 @@ messageInput.addEventListener("focus", function (e) {
     id: socket.id,
   });
 });
+//when being in active state keyy is pressed
 messageInput.addEventListener("keypress", function (e) {
   console.log(typer.value);
   socket.emit("typing", {
@@ -19,13 +21,14 @@ messageInput.addEventListener("keypress", function (e) {
     id: socket.id,
   });
 });
+//when message input is in inactive state or no action is being performed in that box
 messageInput.addEventListener("blur", function (e) {
   socket.emit("typing", {
     feedback: "",
     id: socket.id,
   });
 });
-
+//get msg on socket of type 'typing' => when user is typing
 socket.on("typing", ({ feedback, id }) => {
   if (socket.id == id) {
     return;
@@ -33,7 +36,7 @@ socket.on("typing", ({ feedback, id }) => {
     document.querySelector("#feedback").textContent = feedback;
   }
 });
-
+//form submit state
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   console.log(new Date());
@@ -46,11 +49,12 @@ form.addEventListener("submit", function (e) {
     messageInput.value = "";
   }
 });
+//server emits user count when a client is connected
 socket.on("user count", function (usersNum) {
   console.log(usersNum);
   document.querySelector("#clients-sum").textContent = usersNum;
 });
-
+//socket emits when a msg is send from the user
 socket.on("chat message", function ({ msg, id, dateTime, typer }) {
   console.log(msg);
   var item = document.createElement("li");
@@ -73,10 +77,11 @@ socket.on("chat message", function ({ msg, id, dateTime, typer }) {
   scrollToBottom();
   moveFeedbackToBottom();
 });
-
+//to make the chat box scrollable to the end
 function scrollToBottom() {
   messageContainer.scrollTo(0, messageContainer.scrollHeight);
 }
+//moving feedback to the end of message container
 function moveFeedbackToBottom() {
   const feedbackElement = document.querySelector("li.message-feedback");
   if (feedbackElement) {
