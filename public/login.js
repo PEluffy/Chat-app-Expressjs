@@ -15,5 +15,14 @@ loginForm.addEventListener("submit", (e) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
-  });
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message === "Login Successfull") {
+        console.log(data.message);
+      } else {
+        console.log(data.message);
+      }
+    })
+    .catch((err) => console.error("Error:", err));
 });

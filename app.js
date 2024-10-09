@@ -40,8 +40,10 @@ app.post("/register", (req, res) => {
     );
   });
 });
+//Login handled but checking the json file and responcing to the clint and redirecting to the chat page is not done
+
 app.post("/login", (req, res) => {
-  const userData = req.body;
+  const { useremail, userpassword } = req.body;
   fs.readFile(path.join(__dirname, "user.json"), "utf8", (err, data) => {
     if (err) {
       console.error("Error reading user.json", err);
@@ -53,7 +55,15 @@ app.post("/login", (req, res) => {
     } catch (e) {
       users = [];
     }
-    console.log(users);
+    const user = users.find(
+      (user) =>
+        user.useremail === useremail && user.userpassword === userpassword
+    );
+    if (user) {
+      return res.status(200).json({ message: "Login successfull", user });
+    } else {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
   });
 });
 app.get("/", (req, res) => {
